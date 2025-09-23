@@ -1,0 +1,6 @@
+pypdf
+langchain-community
+openai
+beautifulsoup4
+bs4 
+lxml
