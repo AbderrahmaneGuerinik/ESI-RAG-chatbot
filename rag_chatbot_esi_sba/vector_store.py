@@ -26,7 +26,7 @@ class VectorStore:
         self.vectors = np.vstack([self.vectors, vectors])
         self.metadata.extend(metadata)
 
-    def search(self, query, k=5):
+    def search(self, query, k=1):
         """ 
         search for the most k similar vectors
         Args:
