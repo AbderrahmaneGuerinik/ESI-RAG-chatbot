@@ -1,23 +1,38 @@
-from llm_generator import LLMGenerator
-from vector_store import VectorStore
-from embedding import Embedder
-from loader import JsonLoader
+from .llm_generator import LLMGenerator
+from .vector_store import VectorStore
+from .embedding import Embedder
+from .loader import JsonLoader
+import numpy as np
+import logging
 
-loader = JsonLoader(file_path="../data/raw/ESI-SBA.json")
-vector_store = VectorStore()
+
+loader = JsonLoader(file_path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\raw\ESI-SBA.json")
+
 llm = LLMGenerator()
 
 documents = loader.load_json()
 texts = [doc.page_content for doc in documents]
 
+# embedder = Embedder()
+# vectors = np.array(embedder.vectorize(texts))
+# metadata = [doc.metadata for doc in documents]
+
+
+vector_store = VectorStore()
+# vector_store.add_embeddings(vectors=vectors, metadata=metadata)
+
+
+# save the faiss index
+# vector_store.save_index()
+
 # load the faiss index
-vector_store.load_index(path="../data/vectorstore/index.faiss")
+vector_store.load_index(path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\index.faiss")
 
 
 class RAGChatbot:
     """ Combines the full RAG pipeline """
 
-    def __init__(self, documents, llm=llm, texts=texts):
+    def __init__(self, documents=documents, llm=llm, texts=texts):
         self.vector_store = vector_store
         self.llm = llm
         self.documents = documents
@@ -31,6 +46,9 @@ class RAGChatbot:
             query: the user's question
         """
         I, _, _ = self.vector_store.search(query=query)
-        context = self.texts[int(I[0][0])]
+        logging.info(f"Most similar index: {I[0][0]}")
+        context = '\n'.join(self.texts[i] for i in I[0])
+        logging.info(context)
+        # context = self.texts[int(I[0][0])]
         llm_response = self.llm.generate(query=query, context=context)
         return llm_response

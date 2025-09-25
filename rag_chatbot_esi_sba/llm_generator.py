@@ -20,7 +20,9 @@ class LLMGenerator:
         """
 
         prompt = f""" 
+            Répond avec des phrases claires et complétes.
             Utilise uniquement le contexte ci-dessous pour répondre à la question.
+            
             Contexte :
             {context}
             

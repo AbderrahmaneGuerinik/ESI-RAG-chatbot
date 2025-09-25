@@ -3,6 +3,8 @@ from typing import List
 import numpy as np
 import os
 from openai import OpenAI
+import pickle
+import numpy as np
 
 
 class VectorStore:
@@ -26,7 +28,7 @@ class VectorStore:
         self.vectors = np.vstack([self.vectors, vectors])
         self.metadata.extend(metadata)
 
-    def search(self, query, k=1):
+    def search(self, query, k=5):
         """ 
         search for the most k similar vectors
         Args:
@@ -39,14 +41,23 @@ class VectorStore:
         )
         query_vector = np.array([response.data[0].embedding], dtype="float32")
         D, I = self.index.search(query_vector, k)
-        results_vecs = self.vectors[I]
         results_meta = [[self.metadata[j] for j in row] for row in I]
         return I, results_meta, D
 
-    def save_index(self, path="../data/vectorstore/index.faiss"):
-        """ write the index on disk """
+    def save_index(self, path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\index.faiss"):
+        """ write the index, vectors and metadata on disk """
         faiss.write_index(self.index, path)
+        data = {
+            "vectors": self.vectors,
+            "metadata": self.metadata
+        }
+        with open(r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\data.pkl", "wb") as f:
+            pickle.dump(data, f)
 
-    def load_index(self, path="../data/vectorstore/index.faiss"):
-        """ read the index from disk """
+    def load_index(self, path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\index.faiss"):
+        """ read the index, vectors and metadata from disk """
         self.index = faiss.read_index(path)
+        with open(r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\data.pkl", "rb") as f:
+            data = pickle.load(f)
+            self.vectors = data['vectors']
+            self.metadata = data['metadata']
