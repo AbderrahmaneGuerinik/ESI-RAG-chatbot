@@ -4,9 +4,12 @@ from .embedding import Embedder
 from .loader import JsonLoader
 import numpy as np
 import logging
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
 
 
-loader = JsonLoader(file_path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\raw\ESI-SBA.json")
+loader = JsonLoader(file_path=BASE_DIR.parent / "data" / "raw" / "ESI-SBA.json")
 
 llm = LLMGenerator()
 
@@ -26,7 +29,7 @@ vector_store = VectorStore()
 # vector_store.save_index()
 
 # load the faiss index
-vector_store.load_index(path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\index.faiss")
+vector_store.load_index(path=str(BASE_DIR.parent / "data" / "vectorstore" / "index.faiss"))
 
 
 class RAGChatbot:

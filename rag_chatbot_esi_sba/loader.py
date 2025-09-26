@@ -2,6 +2,9 @@ from langchain_community.document_loaders import JSONLoader
 from langchain_core.documents import Document
 from typing import List
 import logging
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
 
 
 logging.basicConfig(level=logging.INFO)
@@ -10,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 class JsonLoader:
     """ Handles loading langchain documents from a JSON file """
 
-    def __init__(self, file_path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\raw\ESI-SBA.json"):
+    def __init__(self, file_path=BASE_DIR.parent / "data" / "raw" / "ESI-SBA.json"):
         self.file_path = file_path
         """ 
         Initializes the JSON_Loader

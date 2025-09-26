@@ -5,6 +5,9 @@ import os
 from openai import OpenAI
 import pickle
 import numpy as np
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
 
 
 class VectorStore:
@@ -44,20 +47,20 @@ class VectorStore:
         results_meta = [[self.metadata[j] for j in row] for row in I]
         return I, results_meta, D
 
-    def save_index(self, path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\index.faiss"):
+    def save_index(self, path=str(BASE_DIR.parent / "data" / "vectorstore" / "index.faiss")):
         """ write the index, vectors and metadata on disk """
         faiss.write_index(self.index, path)
         data = {
             "vectors": self.vectors,
             "metadata": self.metadata
         }
-        with open(r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\data.pkl", "wb") as f:
+        with open(BASE_DIR.parent / "data" / "vectorstore" / "data.pkl", "wb") as f:
             pickle.dump(data, f)
 
-    def load_index(self, path=r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\index.faiss"):
+    def load_index(self, path=str(BASE_DIR.parent / "data" / "vectorstore" / "index.faiss")):
         """ read the index, vectors and metadata from disk """
         self.index = faiss.read_index(path)
-        with open(r"C:\Users\TERRA MOBILE\OneDrive\Bureau\Projects\rag-chatbot-esi-sba\data\vectorstore\data.pkl", "rb") as f:
+        with open(BASE_DIR.parent / "data" / "vectorstore" / "data.pkl", "rb") as f:
             data = pickle.load(f)
             self.vectors = data['vectors']
             self.metadata = data['metadata']
