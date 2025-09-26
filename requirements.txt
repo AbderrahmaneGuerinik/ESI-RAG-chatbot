@@ -4,3 +4,10 @@ openai
 beautifulsoup4
 bs4 
 lxml
+jq
+numpy
+faiss-cpu
+loguru
+fastapi
+uvicorn
+streamlit
