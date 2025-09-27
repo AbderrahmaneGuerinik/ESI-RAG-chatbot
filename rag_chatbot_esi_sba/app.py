@@ -22,7 +22,7 @@ if "messages" not in st.session_state:
 
 # The sidebar
 with st.sidebar:
-    st.image("./logo.png")
+    st.image("logo.png")
     if st.button("Supprimer l'historique"):
         st.session_state.messages = []
 
