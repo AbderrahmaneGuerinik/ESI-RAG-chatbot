@@ -1,6 +1,10 @@
 import streamlit as st
 import requests
 import time
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+
 
 st.title("ESI-SBA Chatbot")
 
@@ -22,7 +26,7 @@ if "messages" not in st.session_state:
 
 # The sidebar
 with st.sidebar:
-    st.image("logo.png")
+    st.image(BASE_DIR / "logo.png")
     if st.button("Supprimer l'historique"):
         st.session_state.messages = []
 
