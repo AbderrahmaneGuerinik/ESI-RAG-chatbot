@@ -39,7 +39,7 @@ if prompt := st.chat_input("Vous voulez savoir quoi à propose de ESI-SBA ?"):
         st.markdown(prompt)
 
     with st.chat_message("assistant", avatar=BOT_AVATAR):
-        url = "http://127.0.0.1:8000/ask"
+        url = "https://esi-rag-chatbot-1.onrender.com/ask"
         payload = {"question": prompt}
         message_placeholder = st.empty()
         bot_response = ""
