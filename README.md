@@ -81,18 +81,18 @@ This project provides a **REST API backend** built with FastAPI, exposing endpoi
 The **frontend user interface** is built using Streamlit, allowing users to easily ask questions and view responses in a chat-like format.
 
 ## Deployment
-The backend is deployed on Render.
+The backend is deployed on Render.<br>
 The frontend is deployed on streamlit cloud.
 
 ## Tech Stack
-Python 3.11.13
-FAISS
-Numpy
-OpenAI API
-FastAPI
-Streamlit
-langchain
-BeautifulSoup & lxml
+Python 3.11.13<br>
+FAISS<br>
+Numpy<br>
+OpenAI API<br>
+FastAPI<br>
+Streamlit<br>
+langchain<br>
+BeautifulSoup & lxml<br>
 uvicorn
 
 ## Usage
