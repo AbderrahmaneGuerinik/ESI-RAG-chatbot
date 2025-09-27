@@ -100,11 +100,8 @@ Here is the application link: https://esi-sba-chatbot.streamlit.app/
 
 ## Possible Future imporvments
 Use open-source models (instead of relying only on OpenAI.
-
 Enhance the user interface to make the chatbot more intuitive and engaging.
-
 Optimize response time.
-
 Keep data up to date by periodically re-scraping content from the school's official website.
 
 --------
