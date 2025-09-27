@@ -1,4 +1,4 @@
-# RAG Chatbot ES-SBA
+# RAG Chatbot ESI-SBA
 
 <a target="_blank" href="https://cookiecutter-data-science.drivendata.org/">
     <img src="https://img.shields.io/badge/CCDS-Project%20template-328F97?logo=cookiecutter" />
@@ -100,8 +100,11 @@ Here is the application link: https://esi-sba-chatbot.streamlit.app/
 
 ## Possible Future imporvments
 Use open-source models (instead of relying only on OpenAI.
+
 Enhance the user interface to make the chatbot more intuitive and engaging.
+
 Optimize response time.
+
 Keep data up to date by periodically re-scraping content from the school's official website.
 
 --------
